@@ -16,5 +16,19 @@ services:
   mysql:
     build:
       context: "./mysql"
+    ports:
+      - "3306:3306"
     env_file:
       - .env
+
+  phpmyadmin:
+    build:
+      context: "./phpmyadmin" 
+    depends_on:
+      - mysql
+    ports:
+      - "9090:80"
+    env_file:
+      - .env
+    environment:
+      - PMA_HOST=mysql
