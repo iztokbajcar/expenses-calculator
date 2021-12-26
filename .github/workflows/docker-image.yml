@@ -13,20 +13,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    
-    - name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v3
-      with:
-        tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}
-          type=sha
-        flavor: |
-          latest=true
 
     - name: Login to GHCR
       if: github.event_name != 'pull_request'
