@@ -25,12 +25,12 @@
         }
     }
 
-    function getAll() {
+    function getExpenses() {
         $conn = connectToDB("expenses");
-        $sql = $conn -> prepare("SELECT * FROM category");
+        $sql = $conn -> prepare("SELECT * FROM expenses");
         $sql -> execute();
         $sql -> setFetchMode(PDO::FETCH_ASSOC);
         $result = $sql -> fetchAll();
-        var_dump($result);
+        return $result;
     }
 ?>
