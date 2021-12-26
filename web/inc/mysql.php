@@ -19,7 +19,7 @@
             $conn = connect();
             $conn -> query("CREATE DATABASE IF NOT EXISTS expenses");
             $conn -> query("USE expenses");
-            $conn -> query("CREATE TABLE IF NOT EXISTS expense (id INT(6) AUTO_INCREMENT PRIMARY KEY, description VARCHAR(200), category INT(6) NOT NULL DEFAULT 1, date DATE NOT NULL DEFAULT CURRENT_DATE, amount DECIMAL(7,2) NOT NULL DEFAULT 0.00");
+            $conn -> query("CREATE TABLE IF NOT EXISTS expense (id INT(6) AUTO_INCREMENT PRIMARY KEY, description VARCHAR(200), category INT(6) NOT NULL DEFAULT 1, date DATE NOT NULL DEFAULT CURRENT_DATE, amount DECIMAL(7,2) NOT NULL DEFAULT 0.00)");
             $conn -> query("CREATE TABLE IF NOT EXISTS category (id INT(6) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50))");
             $conn -> query("INSERT INTO category (name) VALUES ('Other')");
         }
