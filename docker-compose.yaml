@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   apache: 
-    build: "./apache/"
+    build: 
+      context: "./apache/"
     depends_on:
       - php
       - mysql
@@ -13,14 +14,13 @@ services:
       - "8080:80"
     volumes:
       - ./web/:/var/www/html/
+
+  php:
+    build:
+      context: "./php"
   
   mysql:
-    image: mysql:5.6.40
-    networks:
-      - backend
+    build:
+      context: "./mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=Privz3toGesl0
-  
-  networks:
-    frontend:
-    backend:
