@@ -27,7 +27,7 @@
 
     function getExpenses() {
         $conn = connectToDB("expenses");
-        $sql = $conn -> prepare("SELECT * FROM expenses");
+        $sql = $conn -> prepare("SELECT * FROM expense");
         $sql -> execute();
         $sql -> setFetchMode(PDO::FETCH_ASSOC);
         $result = $sql -> fetchAll();
