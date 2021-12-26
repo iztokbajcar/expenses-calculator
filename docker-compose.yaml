@@ -4,13 +4,17 @@ services:
   apache: 
     build: 
       context: "./apache/"
+    depends_on:
+      - mysql
     ports:
       - "8080:80"
     volumes:
       - ./web/:/var/www/html/
+    env_file:
+      - .env
   
   mysql:
     build:
       context: "./mysql"
-    environment:
-      - MYSQL_ROOT_PASSWORD=Privz3toGesl0
+    env_file:
+      - .env
