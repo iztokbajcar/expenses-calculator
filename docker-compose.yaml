@@ -4,9 +4,6 @@ services:
   apache: 
     build: 
       context: "./apache/"
-    depends_on:
-      - php
-      - mysql
     ports:
       - "8080:80"
     volumes:
