@@ -27,7 +27,7 @@
 
     function getExpenses() {
         $conn = connectToDB("expenses");
-        $sql = $conn -> prepare("SELECT * FROM expense");
+        $sql = $conn -> prepare("SELECT description AS Description, amount AS Amount, name AS Category FROM expense INNER JOIN category ON expense.category = category.id");
         $sql -> execute();
         $sql -> setFetchMode(PDO::FETCH_ASSOC);
         $result = $sql -> fetchAll();
