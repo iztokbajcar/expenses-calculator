@@ -11,12 +11,6 @@ services:
       - "8080:80"
     volumes:
       - ./web/:/var/www/html/
-
-  php:
-    build:
-      context: "./php"
-    volumes:
-      - ./web/:/var/www/html/
   
   mysql:
     build:

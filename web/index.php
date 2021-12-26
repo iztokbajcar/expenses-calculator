@@ -5,6 +5,6 @@
         <title>Expenses calculator</title>
     </head>
     <body>
-        Hello
+        <?php phpinfo(); ?>
     </body>
 </html>
