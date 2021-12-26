@@ -14,19 +14,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Login to GHCR
-      if: github.event_name != 'pull_request'
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Login to GHCR
+    #   if: github.event_name != 'pull_request'
+    #   uses: docker/login-action@v1
+    #   with:
+    #     registry: ghcr.io
+    #     username: ${{ github.repository_owner }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build the Docker image
       run: docker-compose -f "docker-compose.yaml" up -d --build
-
-    - name: Docker-Compose Publish
-      uses: pennsignals/publish_docker-compose@v0.1.1
-      with:
-        docker_compose: 'docker-compose.yaml'
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+      
