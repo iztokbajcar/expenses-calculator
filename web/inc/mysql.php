@@ -19,7 +19,7 @@
             $conn = connect();
             $conn -> query("CREATE DATABASE IF NOT EXISTS expenses");
             $conn -> query("USE expenses");
-            $conn -> query("CREATE TABLE IF NOT EXISTS expense (id INT(6) AUTO_INCREMENT PRIMARY KEY, description VARCHAR(200), category INT(6) NOT NULL, date DATE NOT NULL)");
+            $conn -> query("CREATE TABLE IF NOT EXISTS expense (id INT(6) AUTO_INCREMENT PRIMARY KEY, description VARCHAR(200), category INT(6) NOT NULL DEFAULT 1, date DATE NOT NULL DEFAULT CURRENT_DATE, amount DECIMAL(7,2) NOT NULL DEFAULT 0.00");
             $conn -> query("CREATE TABLE IF NOT EXISTS category (id INT(6) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50))");
             $conn -> query("INSERT INTO category (name) VALUES ('Other')");
         }
@@ -32,5 +32,32 @@
         $sql -> setFetchMode(PDO::FETCH_ASSOC);
         $result = $sql -> fetchAll();
         return $result;
+    }
+
+    // describes a key-value array as an HTML table
+    function createTableFromArray($array) {
+        if (count($array) == 0) {
+            return;
+        }
+
+        $keys = array_keys($array[0]);
+
+        $res = "<table>";
+        $res .= "<tr>";
+        for ($i = 0; $i < count($keys); $i++) {
+            $res .= "<th>" . $keys[$i] . "</th>";
+        }
+        $res .= "</tr>";
+        for ($i = 0; $i < count($array); $i++) {
+            $vals = array_values($array[$i]);
+            var_dump($vals);
+            $res .= "<tr>";
+            for ($j = 0; $j < count($vals); $j++) {
+                $res .= "<td>" . $vals[$j] . "</td>";
+            }
+            $res .= "</tr>";
+        }
+        $res .= "</table>";
+        return $res;
     }
 ?>
