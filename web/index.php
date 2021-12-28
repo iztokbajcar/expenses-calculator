@@ -28,6 +28,7 @@
                 $res .= "<th>" . $keys[$i] . "</th>";
             }
         }
+        $res .= "<th></th>";  // delete buttons
         $res .= "</tr>";
         for ($i = 0; $i < count($array); $i++) {
             $vals = array_values($array[$i]);
@@ -37,6 +38,8 @@
                     $res .= "<td>" . $vals[$j] . "</td>";
                 }
             }
+            // delete button
+            $res .= "<td style=\"cursor: pointer; font-weight: bolder;\" onclick=\"deleteEntryConfirm(" . $array[$i]["id"] . ", \'" . $array[$i]["Description"] . "\')\">[X]</td>";
             $res .= "</tr>";
         }
         $res .= "</table>";
@@ -159,6 +162,26 @@
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify({
                     name: name
+                }));
+            }
+
+            function deleteEntryConfirm(id, desc) {
+                if (confirm("You are about to delete entry '" + desc + "'.\nPress OK to confirm.")) {
+                    deleteEntry(id);
+                }
+            }
+
+            function deleteEntry(id) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location = window.location;  // refresh the page
+                    }
+                };
+                xhr.open("POST", "/inc/deleteEntry.php", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    id: id
                 }));
             }
 

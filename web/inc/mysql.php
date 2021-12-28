@@ -43,6 +43,13 @@
         $sql -> execute();
     }
 
+    function deleteExpense($id) {
+        $conn = connectToDB("expenses");
+        $sql = $conn -> prepare("DELETE FROM expense WHERE id = :id;");
+        $sql -> bindParam(":id", $id, PDO::PARAM_INT);
+        $sql -> execute();
+    }
+
     function getCategories() {
         $conn = connectToDB("expenses");
         $sql = $conn -> prepare("SELECT * FROM category;");
