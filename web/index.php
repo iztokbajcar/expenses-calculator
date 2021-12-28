@@ -29,7 +29,6 @@
         $res .= "</tr>";
         for ($i = 0; $i < count($array); $i++) {
             $vals = array_values($array[$i]);
-            var_dump($vals);
             $res .= "<tr>";
             for ($j = 0; $j < count($vals); $j++) {
                 $res .= "<td>" . $vals[$j] . "</td>";
@@ -38,6 +37,19 @@
         }
         $res .= "</table>";
         return $res;
+    }
+
+    function refreshTable() {
+        $expenses = getExpenses();
+        if (count($expenses) == 0) {
+            // Array is empty
+            echo "<script>document.getElementById('expenses-table').innerHTML = 'The database is currently empty.';</script>";
+        } else {
+            if (count($expenses) > 20) {
+                
+            }
+            echo "<script>document.getElementById('expenses-table').innerHTML = '" . createTableFromArray($expenses) . "';</script>";
+        }
     }
 ?>
 
@@ -74,19 +86,12 @@
     </head>
     <body>
         <h1>Expenses calculator</h1>
+        <div id="expenses-table">
+        </div>
         <?php 
             initDB(); 
-            $expenses = getExpenses();
+            refreshTable();
             $categories = getCategories();
-            if (count($expenses) == 0) {
-                // Array is empty
-                echo "<p>The database is currently empty.</p>";
-            } else {
-                if (count($expenses) > 20) {
-                    
-                }
-                echo createTableFromArray($expenses);
-            }
         ?>
 
         <div class="card" style="padding: 10px;">
@@ -114,6 +119,7 @@
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         console.log(this.responseText);
+                        window.location = window.location;  // refresh the page
                     }
                 };
                 xhr.open("POST", "/inc/addEntry.php", true);
@@ -126,7 +132,6 @@
 
                 console.log(cat, desc, amount);
             }
-
 
         </script>
 
