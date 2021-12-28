@@ -24,14 +24,18 @@
         $res = "<table>";
         $res .= "<tr>";
         for ($i = 0; $i < count($keys); $i++) {
-            $res .= "<th>" . $keys[$i] . "</th>";
+            if ($keys[$i] != "id") {
+                $res .= "<th>" . $keys[$i] . "</th>";
+            }
         }
         $res .= "</tr>";
         for ($i = 0; $i < count($array); $i++) {
             $vals = array_values($array[$i]);
             $res .= "<tr>";
             for ($j = 0; $j < count($vals); $j++) {
-                $res .= "<td>" . $vals[$j] . "</td>";
+                if ($keys[$j] != "id") {
+                    $res .= "<td>" . $vals[$j] . "</td>";
+                }
             }
             $res .= "</tr>";
         }
