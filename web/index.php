@@ -86,11 +86,8 @@
     </head>
     <body>
         <h1>Expenses calculator</h1>
-        <div id="expenses-table">
-        </div>
         <?php 
-            initDB(); 
-            refreshTable();
+            initDB();
             $categories = getCategories();
         ?>
 
@@ -109,6 +106,10 @@
             </div>
         </div>
 
+        <div id="expenses-table">
+        </div>
+
+        <?php refreshTable(); ?>
         <script>
             function addEntry() {
                 var cat = document.getElementById("category").value;
