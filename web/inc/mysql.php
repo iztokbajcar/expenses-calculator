@@ -34,6 +34,15 @@
         return $result;
     }
 
+    function getCategories() {
+        $conn = connectToDB("expenses");
+        $sql = $conn -> prepare("SELECT * FROM category;");
+        $sql -> execute();
+        $sql -> setFetchMode(PDO::FETCH_ASSOC);
+        $result = $sql -> fetchAll();
+        return $result;
+    }
+
     // describes a key-value array as an HTML table
     function createTableFromArray($array) {
         if (count($array) == 0) {
