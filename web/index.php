@@ -106,6 +106,17 @@
             </div>
         </div>
 
+        <div class="card" style="padding: 10px;">
+            <h2>Add category</h2>
+            <div class="form-group">
+                <div class="col-xs-2">
+                    <label for="name">Name:</label>
+                    <input id="name" type="text" maxlength="50" /><br>
+                    <input type="button" value="Add" onclick="addCategory();" />
+                </div>
+            </div>
+        </div>
+
         <div id="expenses-table">
         </div>
 
@@ -119,7 +130,6 @@
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(this.responseText);
                         window.location = window.location;  // refresh the page
                     }
                 };
@@ -130,8 +140,22 @@
                     description: desc,
                     amount: amount
                 }));
+            }
 
-                console.log(cat, desc, amount);
+            function addCategory() {
+                var name = document.getElementById("name").value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location = window.location;  // refresh the page
+                    }
+                };
+                xhr.open("POST", "/inc/addCategory.php", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    name: name
+                }));
             }
 
         </script>
