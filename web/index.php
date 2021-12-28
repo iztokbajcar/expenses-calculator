@@ -5,7 +5,7 @@
         if (count($categories) == 0) {
             return "<select class='form-control' id='category' name='category'><option value='1'>(not available)</option></select>";
         }
-        $res = "<select name='category'>";
+        $res = "<select id='category' name='category'>";
         for ($i = 0; $i < count($categories); $i++) {
             $res .= "<option " . (($i == 0) ? "selected " : " ") . "value='" . $categories[$i]["id"] ."'>" . $categories[$i]["name"] . "</option>";
         }
@@ -78,6 +78,29 @@
         </div>
 
         <script>
+            function addEntry() {
+                var cat = document.getElementById("category").value;
+                var desc = document.getElementById("description").value;
+                var amount = document.getElementById("amount").value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                    }
+                };
+                xhr.open("POST", "/inc/addEntry.php", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    category: cat,
+                    description: desc,
+                    amount: amount
+                }));
+
+                console.log(cat, desc, amount);
+            }
+
+
         </script>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
