@@ -12,6 +12,33 @@
         $res .= "</select>";
         return $res;
     }
+
+    // describes a key-value array as an HTML table
+    function createTableFromArray($array) {
+        if (count($array) == 0) {
+            return;
+        }
+
+        $keys = array_keys($array[0]);
+
+        $res = "<table>";
+        $res .= "<tr>";
+        for ($i = 0; $i < count($keys); $i++) {
+            $res .= "<th>" . $keys[$i] . "</th>";
+        }
+        $res .= "</tr>";
+        for ($i = 0; $i < count($array); $i++) {
+            $vals = array_values($array[$i]);
+            var_dump($vals);
+            $res .= "<tr>";
+            for ($j = 0; $j < count($vals); $j++) {
+                $res .= "<td>" . $vals[$j] . "</td>";
+            }
+            $res .= "</tr>";
+        }
+        $res .= "</table>";
+        return $res;
+    }
 ?>
 
 <!DOCTYPE html>
