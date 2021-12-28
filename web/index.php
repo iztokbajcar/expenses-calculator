@@ -128,7 +128,15 @@
             <h2>Summary</h2>
             <div class="form-group">
                 <div class="col-xs-2">
-                    <b>Total: </b><span id="total"></span>
+                    <b>Total: </b><?php echo "<span style=\"background: yellow;\">" . sumAll() . "</span>"; ?><br>
+                    <b>By category:</b><br>
+                    <ul>
+                    <?php  // TODO: make this client-side
+                        for ($i = 0; $i < count($categories); $i++) {
+                            echo "<li>" . $categories[$i]["name"] . ": <span style=\"background: yellow;\">" . sumByCategory($categories[$i]["id"]) . "</span></li>";
+                        }
+                    ?>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -194,7 +202,7 @@
                 }));
             }
 
-            function sumAll() {
+            function sumAll(catId) {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
@@ -204,11 +212,9 @@
                 xhr.open("POST", "/inc/calc.php", true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify({
-
+                    category: catId
                 }));
             }
-
-            sumAll();
 
         </script>
 

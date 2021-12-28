@@ -9,6 +9,8 @@
         $cat = $array["category"];
         if (strlen($cat) == 0) {  // return the sum of all expenses
             echo sumAll();
+        } else {
+            echo sumByCategory($cat);
         }
     } 
 ?>

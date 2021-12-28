@@ -75,4 +75,14 @@
         return $result[0]["total"];
     }
 
+    function sumByCategory($cat) {
+        $conn = connectToDB("expenses");
+        $sql = $conn -> prepare("SELECT SUM(amount) AS total FROM expense WHERE category = :cat;");
+        $sql -> bindParam(":cat", $cat, PDO::PARAM_INT);
+        $sql -> execute();
+        $sql -> setFetchMode(PDO::FETCH_ASSOC);
+        $result = $sql -> fetchAll();
+        return $result[0]["total"];
+    }
+
 ?>
