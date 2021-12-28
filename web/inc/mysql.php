@@ -39,7 +39,7 @@
         $sql = $conn -> prepare("INSERT INTO expense (category, description, amount) VALUES (:cat, :desc, :amount);");
         $sql -> bindParam(":cat", $category, PDO::PARAM_INT);
         $sql -> bindParam(":desc", $description, PDO::PARAM_STR);
-        $sql -> bindParam(":amount", $amount, PDO::PARAM_INT);
+        $sql -> bindParam(":amount", $amount, PDO::PARAM_STR);
         $sql -> execute();
     }
 
