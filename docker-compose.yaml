@@ -6,8 +6,8 @@ services:
       context: "./apache/"
     depends_on:
       - mysql
-    ports:
-      - "8080:80"
+    expose:
+      - 80
     volumes:
       - ./web/:/var/www/html/
     env_file:
@@ -16,8 +16,8 @@ services:
   mysql:
     build:
       context: "./mysql"
-    ports:
-      - "3306:3306"
+    expose:
+      - 3306
     env_file:
       - .env
 
@@ -26,9 +26,22 @@ services:
       context: "./phpmyadmin" 
     depends_on:
       - mysql
-    ports:
-      - "9090:80"
+    expose:
+      - 80
     env_file:
       - .env
     environment:
       - PMA_HOST=mysql
+
+  proxy:
+    build:
+      context: "./proxy"
+    depends_on:
+      - apache
+      - phpmyadmin
+    ports:
+      - "8888:8888"
+      - "8889:8889"
+    extra_hosts:
+      - "apache.local:127.0.0.1"
+      - "phpmyadmin.local:127.0.0.1"
