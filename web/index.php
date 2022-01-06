@@ -108,6 +108,8 @@
                     <input id="description" name="description" type="text" maxlength="50" /><br>
                     <label for="description">Enter amount:</label>
                     <input id="amount" name="amount" type="number" min="0.01" value="0.01" step=".01" /><br>
+                    <label for="date">Enter date:</label>
+                    <input id="date" type="date" /><br>
                     <input type="button" value="Add" onclick="addEntry();" />
                 </div>
             </div>
@@ -150,6 +152,7 @@
                 var cat = document.getElementById("category").value;
                 var desc = document.getElementById("description").value;
                 var amount = document.getElementById("amount").value;
+                var date = document.getElementById("date").value;
 
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
@@ -162,7 +165,8 @@
                 xhr.send(JSON.stringify({
                     category: cat,
                     description: desc,
-                    amount: amount
+                    amount: amount,
+                    date: date
                 }));
             }
 

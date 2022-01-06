@@ -27,19 +27,20 @@
 
     function getExpenses() {
         $conn = connectToDB("expenses");
-        $sql = $conn -> prepare("SELECT expense.id, DATE_FORMAT(date, \"%d/%m/%Y\") AS Date, description AS Description, amount AS Amount, name AS Category FROM expense INNER JOIN category ON expense.category = category.id");
+        $sql = $conn -> prepare("SELECT expense.id, DATE_FORMAT(date, \"%d/%m/%Y\") AS Date, description AS Description, amount AS Amount, name AS Category FROM expense INNER JOIN category ON expense.category = category.id ORDER BY date");
         $sql -> execute();
         $sql -> setFetchMode(PDO::FETCH_ASSOC);
         $result = $sql -> fetchAll();
         return $result;
     }
 
-    function addExpense($category, $description, $amount) {
+    function addExpense($category, $description, $amount, $date) {
         $conn = connectToDB("expenses");
-        $sql = $conn -> prepare("INSERT INTO expense (category, description, amount) VALUES (:cat, :desc, :amount);");
+        $sql = $conn -> prepare("INSERT INTO expense (category, description, amount, date) VALUES (:cat, :desc, :amount, :date);");
         $sql -> bindParam(":cat", $category, PDO::PARAM_INT);
         $sql -> bindParam(":desc", $description, PDO::PARAM_STR);
         $sql -> bindParam(":amount", $amount, PDO::PARAM_STR);
+        $sql -> bindParam(":date", $date, PDO::PARAM_STR);
         $sql -> execute();
     }
 

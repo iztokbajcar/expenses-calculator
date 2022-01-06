@@ -9,7 +9,8 @@
         $cat = $array["category"];
         $desc = $array["description"];
         $amount = $array["amount"];
+        $date = $array["date"];
 
-        addExpense($cat, $desc, $amount);
+        addExpense($cat, $desc, $amount, $date);
     }
 ?>
