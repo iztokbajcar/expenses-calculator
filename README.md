@@ -26,7 +26,7 @@ By clicking on the **Add** button, the entry will be added to the database and s
 ![After adding an entry](screenshots/table.png "After adding an entry")  
 The **Summary** section provides an overview of total combined expenses as well as the sum of expenses by a particular category for each category defined in the database, as can be seen on the screenshot below.
 ![A slightly more populated table](screenshots/table2.png "A slightly more populated table")  
-Clicking on the **\[X\]** button of a table entry will delete the entry, allowing the user to cancel the action via a confirmation dialog.[^3]
+Clicking on the **\[X\]** button of a table entry will delete the entry, allowing the user to cancel the action via a confirmation dialog.[^3]   
 ![A confirmation dialog](screenshots/confirm.png "A confirmation dialog")  
 
 [^1]: If docker-compose displays an error such as `Bind for 0.0.0.0:8888 failed: port is already allocated`, another application may be occupying one or more ports the calculator is configured to use. To remedy such a situation, alter line 43 or 44 of [docker-compose.yaml](docker-compose.yaml), depending on the problematic port, by changing the number **on the left-hand side of the `:` symbol** to a port number not already being used on your system. For example, setting line 43 to `- "1234:8888"` should instruct docker-compose to use port `1234` instead, in which case the app will then be available on http://localhost:1234. **Do not change the number on the right-hand side as it will render the app unusable.**
