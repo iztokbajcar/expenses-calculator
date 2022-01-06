@@ -16,5 +16,9 @@ Its web interface is accessible on http://localhost:8889 [^1] while the app is r
 When you open the app for the first time, you will be greeted by a screen similar to the one on the image below.
 ![The calculator in action](screenshots/calc.png "The calculator in action")
 As can be seen on the screenshot, the app's database is currently empty. You can **add entries** onto the expenses list by filling out the **Add entry** section:
+* **Category**: You can divide your expenses into categories. One category, `Other`, is already present by default, but you can add more in the **Add category** section below. 
+* **Description**: You can set a description (your notes) here.
+* **Amount**: The amount you spent. The combined value of all expenses will be displayed in the **Summary** section.
+* **Date**: Here you can specify the date the expense took place.
 
 [^1]: If docker-compose displays an error such as `Bind for 0.0.0.0:8888 failed: port is already allocated`, another application may be occupying one or more ports the calculator is configured to use. To remedy such a situation, alter line 43 or 44 of [docker-compose.yaml](docker-compose.yaml), depending on the problematic port, by changing the number **on the left-hand side of the `:` symbol** to a port number not already being used on your system. For example, setting line 43 to `- "1234:8888"` should instruct docker-compose to use port `1234` instead, in which case the app will then be available on http://localhost:1234. **Do not change the number on the right-hand side as it will render the app unusable.**
