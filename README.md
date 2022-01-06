@@ -20,5 +20,9 @@ As can be seen on the screenshot, the app's database is currently empty. You can
 * **Description**: You can set a description (your notes) here.
 * **Amount**: The amount you spent. The combined value of all expenses will be displayed in the **Summary** section.
 * **Date**: Here you can specify the date the expense took place.
+By clicking on the **Add** button, the entry will be added to the database and subsequently displayed in the table on the bottom of the page.[^2]
+![Adding an entry](screenshots/adding.png "Adding an entry")
+![After adding an entry](screenshots/table.png "After adding an entry")
 
 [^1]: If docker-compose displays an error such as `Bind for 0.0.0.0:8888 failed: port is already allocated`, another application may be occupying one or more ports the calculator is configured to use. To remedy such a situation, alter line 43 or 44 of [docker-compose.yaml](docker-compose.yaml), depending on the problematic port, by changing the number **on the left-hand side of the `:` symbol** to a port number not already being used on your system. For example, setting line 43 to `- "1234:8888"` should instruct docker-compose to use port `1234` instead, in which case the app will then be available on http://localhost:1234. **Do not change the number on the right-hand side as it will render the app unusable.**
+[^2]: The rows are displayed sorted by date, oldest entries first.
