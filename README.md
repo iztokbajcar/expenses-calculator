@@ -29,6 +29,24 @@ The **Summary** section provides an overview of total combined expenses as well 
 Clicking on the **\[X\]** button of a table entry will delete the entry, allowing the user to cancel the action via a confirmation dialog.[^3]   
 ![A confirmation dialog](screenshots/confirm.png "A confirmation dialog")  
 
+# Details
+This application stack consists of four docker containers:
+* The main web server (the "calculator" app)
+  * Dockerfile: [apache/Dockerfile](apache/Dockerfile)
+  * Using image **php:7.4.3-apache**
+* The PHPMyAdmin server
+  * Dockerfile: [phpmyadmin/Dockerfile](phpmyadmin/Dockerfile)
+  * Using image **phpmyadmin/phpmyadmin:5**
+* MariaDB
+  * Dockerfile: [mysql/Dockerfile](mysql/Dockerfile)
+  * Using image **mariadb:10.7.1**
+* A reverse proxy container
+  * Built using multi-stage builds
+  * Dockerfile: [proxy/Dockerfile](proxy/Dockerfile)
+  * Using image: **nginx**
+
+
+
 [^1]: If docker-compose displays an error such as `Bind for 0.0.0.0:8888 failed: port is already allocated`, another application may be occupying one or more ports the calculator is configured to use. To remedy such a situation, alter line 43 or 44 of [docker-compose.yaml](docker-compose.yaml), depending on the problematic port, by changing the number **on the left-hand side of the `:` symbol** to a port number not already being used on your system. For example, setting line 43 to `- "1234:8888"` should instruct docker-compose to use port `1234` instead, in which case the app will then be available on http://localhost:1234. **Do not change the number on the right-hand side as it will render the app unusable.**
 [^2]: The rows are displayed sorted by date, oldest entries first.
 [^3]: Please note that deleting entries is irreversible, so [creating backups](#backups) every now and then is advisable.
