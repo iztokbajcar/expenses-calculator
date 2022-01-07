@@ -75,6 +75,7 @@
                 border: 5px solid black;
                 margin-left: auto;
                 margin-right: auto;
+                margin-bottom: 20px;
                 width: 85%;
             }
 
