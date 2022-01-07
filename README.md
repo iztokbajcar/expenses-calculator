@@ -40,13 +40,25 @@ This application stack consists of four docker containers:
 * MariaDB
   * Dockerfile: [mysql/Dockerfile](mysql/Dockerfile)
   * Using image **mariadb:10.7.1**
+  * Uses a volume (`data`), bound to `/var/lib/mysql` on the container
 * A reverse proxy container
   * Built using multi-stage builds
   * Dockerfile: [proxy/Dockerfile](proxy/Dockerfile)
   * Using image: **nginx**
 
+The latter is built in a multi-stage manner, first generating two SSL keys/certificates on an Alpine image and then copying them onto an nginx image. It listens for incoming HTTP connections and redirects them to one of the two HTTPS virtual hosts - for the calculator app and PHPMyAdmin, respectively - depending on the source port, using the generated certificates.
 
+The main app's backend is written in PHP, using [PDO](https://www.php.net/manual/en/intro.pdo.php) to connect to the MySQL/MariaDB container. Data is stored in the `data` folder (bound using the `volumes` directive in [docker-compose.yaml](docker-compose.yaml) to the mysql data directory) in order for it to persist in case you remove the containers or stop the app using `docker-compose down`.
+
+# Plans for the future
+This app is currently in some kind of a demo stage, missing some useful features such as:
+* Styling (currently looking a bit plain)
+* Form validation (posting invalid values - such as the placeholder date - when adding an entry will process the action, but fail silently)
+* Configurable row sorting
+* Filtering data based on the date, multiple categories, or user preferences
+* Maybe a currency converter?
+* ...
 
 [^1]: If docker-compose displays an error such as `Bind for 0.0.0.0:8888 failed: port is already allocated`, another application may be occupying one or more ports the calculator is configured to use. To remedy such a situation, alter line 43 or 44 of [docker-compose.yaml](docker-compose.yaml), depending on the problematic port, by changing the number **on the left-hand side of the `:` symbol** to a port number not already being used on your system. For example, setting line 43 to `- "1234:8888"` should instruct docker-compose to use port `1234` instead, in which case the app will then be available on http://localhost:1234. **Do not change the number on the right-hand side as it will render the app unusable.**
 [^2]: The rows are displayed sorted by date, oldest entries first.
-[^3]: Please note that deleting entries is irreversible, so [creating backups](#backups) every now and then is advisable.
+[^3]: Please note that deleting entries is irreversible.
