@@ -18,6 +18,8 @@ services:
       context: "./mysql"
     expose:
       - 3306
+    volumes:
+      - ./data/:/var/lib/mysql/
     env_file:
       - .env
 
