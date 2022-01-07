@@ -50,6 +50,8 @@ The latter is built in a multi-stage manner, first generating two SSL keys/certi
 
 The main app's backend is written in PHP, using [PDO](https://www.php.net/manual/en/intro.pdo.php) to connect to the MySQL/MariaDB container. Data is stored in the `data` folder (bound using the `volumes` directive in [docker-compose.yaml](docker-compose.yaml) to the mysql data directory) in order for it to persist in case you remove the containers or stop the app using `docker-compose down`.
 
+CI/CD is managed using [GitHub Actions](https://github.com/features/actions).
+
 # Plans for the future
 This app is currently in some kind of a demo stage, missing some useful features such as:
 * Styling (currently looking a bit plain)
