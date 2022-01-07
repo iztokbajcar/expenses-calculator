@@ -8,8 +8,6 @@ services:
       - mysql
     expose:
       - 80
-    volumes:
-      - ./web/:/var/www/html/
     env_file:
       - .env
   
